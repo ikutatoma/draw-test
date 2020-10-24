@@ -31,14 +31,19 @@ window.addEventListener('load', () => {
     lastPosition.y = y;
   }
 
+
   function clear() {
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 
   function dragStart(event) {
     context.beginPath();
-
     isDrag = true;
+    var randomColor = "#";
+    for (var i = 0; i < 6; i++) {
+      randomColor += (16 * Math.random() | 0).toString(16);
+    }
+    currentColor = randomColor
   }
 
   function dragEnd(event) {
@@ -51,14 +56,6 @@ window.addEventListener('load', () => {
   function initEventHandler() {
     const clearButton = document.querySelector('#clear-button');
     clearButton.addEventListener('click', clear);
-
-    // 消しゴムモードを選択したときの挙動
-    const eraserButton = document.querySelector('#eraser-button');
-    eraserButton.addEventListener('click', () => {
-      // 消しゴムと同等の機能を実装したい場合は現在選択している線の色を
-      // 白(#FFFFFF)に変更するだけでよい
-      currentColor = '#FFFFFF';
-    });
     canvas.addEventListener('mousedown', dragStart);
     canvas.addEventListener('mouseup', dragEnd);
     canvas.addEventListener('mouseout', dragEnd);
@@ -67,24 +64,6 @@ window.addEventListener('load', () => {
     });
   }
 
-  // カラーパレットの設置を行う
-  function initColorPalette() {
-    const joe = colorjoe.rgb('color-palette', currentColor);
-
-    // 'done'イベントは、カラーパレットから色を選択した時に呼ばれるイベント
-    // ドキュメント: https://github.com/bebraw/colorjoe#event-handling
-    joe.on('done', color => {
-      // コールバック関数の引数からcolorオブジェクトを受け取り、
-      // このcolorオブジェクト経由で選択した色情報を取得する
-
-      // color.hex()を実行すると '#FF0000' のような形式で色情報を16進数の形式で受け取れる
-      // draw関数の手前で定義されている、線の色を保持する変数に代入して色情報を変更する
-      currentColor = color.hex();
-    });
-  }
-
   initEventHandler();
 
-  // カラーパレット情報を初期化する
-  initColorPalette();
 });

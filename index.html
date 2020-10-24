@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- 色変更に使うライブラリで用意されているCSSを導入 https://github.com/bebraw/colorjoe -->
   <link rel="stylesheet" href="public/color.css">
+    <script src="./public/main.js"></script>
   <title>お絵かきアプリ</title>
 </head>
 <body>
   <div>
     <canvas id="draw-area" style="border: 1px solid #000000;"></canvas>
     <span id="color-palette"></span>
-    <!-- 色を選択できるカラーパレットを用意する。 -->
   </div>
   <div>
     <button id="clear-button">全消し</button>
@@ -20,20 +19,14 @@
   <div>
     <button id="eraser-button">消しゴムモード</button>
   </div>
-  <!-- 色変更に使うライブラリを導入 https://github.com/bebraw/colorjoe -->
-  <script src="./public/color.min.js"></script>
-  <script src="./public/main.js"></script>
 </body>
 
 <script type="text/javascript">
-  console.log("canvasの大きさを調べます")
   var canvas = document.getElementById("draw-area");
   canvas.width = screen.width;
   canvas.height =	screen.height;
   var width = canvas.width;
   var height = canvas.height;
-  console.log(width)
-  console.log(height)
 </script>
 </html>
 
